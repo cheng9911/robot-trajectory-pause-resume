@@ -1,0 +1,104 @@
+<mujoco model="diana">
+  <compiler angle="radian" />
+  <option integrator="implicitfast" />
+
+    <default>
+        <default class="diana">
+            <material specular="0.5" shininess="0.25"/>
+            <joint axis="0 0 1"/>
+            <!-- <general gaintype="fixed" biastype="affine" gainprm="2000" biasprm="0 -2000 -200"/> -->
+            <general gaintype="fixed" biastype="affine" ctrlrange="-6.2831 6.2831" gainprm="2000"
+			biasprm="0 -2000 -400" forcerange="-150 150" />
+            <default class="joint_1">
+                <joint range="-3.12 3.12"/>
+                <general ctrlrange="-3.1415 3.1415"/>
+            </default>
+            <default class="joint_2">
+                <joint range="-2.0944 2.0944"/>
+                <general ctrlrange="-2.0944 2.0944"/>
+            </default>
+              <default class="size1">
+        <general gainprm="400" biasprm="0 -500 -100" forcerange="-28 28" />
+      </default>
+            <default class="joint_3">
+                <joint range="-3.05433 3.05433"/>
+                <general ctrlrange="-3.05433 3.05433"/>
+            </default>
+            <default class="visual">
+                <geom type="mesh" contype="0" conaffinity="0" group="2" material="white"/>
+            </default>
+            <default class="collision">
+                <geom type="cylinder" />
+            </default>
+            <site size="0.001" rgba="1 0 0 1" group="4"/>
+        </default>
+    </default>
+
+  <asset>
+    <mesh name="diana_base" file="base.obj"/>
+    <mesh name="link_1" file="link_1.obj"/>
+    <mesh name="link_2" file="link_2.obj"/>
+    <mesh name="link_3" file="link_3.obj"/>
+    <mesh name="link_4" file="link_4.obj"/>
+    <mesh name="link_5" file="link_5.obj"/>
+    <mesh name="link_6" file="link_6.obj"/>
+    <mesh name="link_7" file="link_7.obj"/>
+  </asset>
+
+  <worldbody>
+  <light name="spotlight" mode="targetbodycom" target="link_3" pos="0 -1 2"/>
+    <body name="diana_base" pos="0.8 0.6 0.745" quat="1 0 0 0" childclass="diana">
+      <inertial mass="4.0" pos="0 0 0" diaginertia="0.00443333156 0.00443333156 0.0072"/>
+      <geom type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="diana_base"/>
+    
+    <body name="link_1" pos="0 0 0.2856">
+      <inertial pos="5.52341e-05 0.0254878 -0.0355441" quat="0.691193 -0.148511 0.148051 0.691576" mass="1.09026" diaginertia="0.00692617 0.00585031 0.00412411"/>
+      <joint name="joint_1" pos="0 0 0" axis="0 0 -1" range="-3.12 3.12" />
+      <geom type="mesh" rgba="0.796078 0.823529 0.937255 1" mesh="link_1"/>
+      <body name="link_2" quat="0.707107 -0.707107 0 0">
+        <inertial pos="-3.62725e-06 -0.0292741 -0.0412808" quat="0.617151 0.34497 -0.344838 0.61742" mass="1.09515" diaginertia="0.00672265 0.00575818 0.00369374"/>
+        <joint name="joint_2" pos="0 0 0" axis="0 0 1" range="-3.12 3.12" />
+        <geom type="mesh" rgba="0.980392 0.980392 0.470588 1" mesh="link_2"/>
+        <body name="link_3" pos="0 -0.4586 0" quat="0.707107 0.707107 0 0">
+          <inertial pos="0.0114318 0.0101708 -0.151317" quat="0.531181 0.0446203 0.0932258 0.840931" mass="2.01687" diaginertia="0.0380442 0.0369189 0.00782814"/>
+          <joint name="joint_3" pos="0 0 0" axis="0 0 -1" range="-3.12 3.12" />
+          <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="link_3"/>
+          <body name="link_4" pos="0.065 0 0" quat="0.707107 -0.707107 0 0">
+            <inertial pos="-0.0240716 -0.0235632 -0.0366858" quat="0.759875 0.103862 -0.465331 0.441894" mass="0.849743" diaginertia="0.00419973 0.00389504 0.00186162"/>
+            <joint name="joint_4" pos="0 0 0" axis="0 0 1" range="-3.12 3.12" />
+            <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="link_4"/>
+            <body name="link_5" pos="-0.0528 -0.47702 0" quat="0.707107 0.707107 0 0">
+              <inertial pos="-0.00867148 -0.03835 -0.210246" quat="0.446674 0.0377876 -0.128743 0.884579" mass="1.2058" diaginertia="0.0219771 0.0218397 0.00233919"/>
+              <joint name="joint_5" pos="0 0 0" axis="0 0 -1" range="-3.12 3.12" />
+              <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="link_5"/>
+              <body name="link_6" pos="-0.0122 0 -0.021619" quat="0 0 -0.707107 -0.707107">
+                <inertial pos="0.0458972 -0.0084858 0.00782578" quat="0.0424626 0.6118 0.170922 0.771157" mass="0.847158" diaginertia="0.00444053 0.00440141 0.00272972"/>
+                <joint name="joint_6" pos="0 0 0" axis="0 0 -1" range="-3.12 3.12" />
+                <geom pos="0 0 0" quat="0 0 0 1" type="mesh" rgba="0.980392 0.980392 0.470588 1" mesh="link_6"/>
+                <body name="link_7" pos="0.087 0.1169 0" quat="0.707107 0.707107 0 0">
+                  <inertial pos="0.00117005 5.03192e-06 0.0151382" quat="0.499962 0.501129 -0.498877 0.500029" mass="0.233956" diaginertia="0.000240243 0.000142027 0.000134422"/>
+                  <joint name="joint_7" pos="0 0 0" axis="0 0 1" range="-3.12 3.12" />
+                  <geom type="mesh" rgba="0.898039 0.917647 0.929412 1" mesh="link_7"/>
+                  <!-- <site name="tcp" pos="0 0 0" size="0.00001" rgba="0 1 0 0.5" group="2" /> -->
+                  <body name="flange" pos="0 0.0 -0.00" quat="0 -0.7071068 0.7071068 0 ">
+                      <site name="tcp" pos="0 0 0" size="0.00001" rgba="0 1 0 0.5" group="2" />
+                    </body>
+                    </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+        <general name="actuator_1" joint="joint_1" class="joint_1" />
+        <general name="actuator_2" joint="joint_2" class="joint_1" />
+        <general name="actuator_3" joint="joint_3" class="joint_1" />
+        <general name="actuator_4" joint="joint_4" class="joint_1" />
+        <general name="actuator_5" joint="joint_5" class="size1" />
+        <general name="actuator_6" joint="joint_6" class="size1" />
+        <general name="actuator_7" joint="joint_7" class="size1" />
+  </actuator>
+</mujoco>

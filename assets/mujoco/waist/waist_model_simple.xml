@@ -1,0 +1,145 @@
+<mujoco>
+    <option gravity="0 0 0"/>
+  <default>
+   <default class="plastic">
+     <geom solimp="0.5 0.99 0.0001" solref="0.005 1"/>
+    
+     <default class="plastic_visual">
+       <geom type="mesh"  contype="0" conaffinity="0" group="2"/>
+     </default>
+
+     <default class="plastic_collision">
+       <geom group="3"/>
+     </default>
+    
+   </default>
+  </default>
+    <default>
+        <joint type="hinge" frictionloss="0.01" damping='0.01' />
+        <position ctrllimited="true" ctrlrange="-3.14 3.14" forcelimited="true" forcerange="-50 50" kp="10" />
+    </default>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512" />
+        <texture name="texplane" type="2d" builtin="checker" rgb1=".2 .3 .4" rgb2=".1 0.15 0.2" width="512" height="512" mark="cross" markrgb=".8 .8 .8" />
+
+        <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true" />
+    </asset>
+    <asset>
+        <mesh name="base_link" file="base_link.STL"/>
+        <mesh name="base_link_new" file="base_link_new.STL"/>
+        <mesh name="link1" file="link1.STL"/>
+        <mesh name="Link1" file="Link1.STL"/>
+        <mesh name="link5" file="link5.STL"/>
+        <mesh name="Link5" file="Link5.STL"/>
+        <mesh name="link9" file="link9.STL"/>
+        <mesh name="Link9" file="Link9.STL"/>
+        <mesh name="link7" file="link7.STL"/>
+        <mesh name="Link7" file="Link7.STL"/>
+        <mesh name="link3" file="link3.STL"/>
+        <mesh name="Link3" file="Link3.STL"/>
+        <mesh name="link4" file="link4.STL"/>
+        <mesh name="Link4" file="Link4.STL"/>
+        <mesh name="link8" file="link8.STL"/>
+        <mesh name="Link8" file="Link8.STL"/>
+        <mesh name="link6" file="link6.STL"/>
+        <mesh name="Link6" file="Link6.STL"/>
+        <mesh name="Link2" file="Link2.STL"/>
+        <mesh name="link2" file="link2.STL"/>
+    </asset>
+
+    <worldbody>
+        <light directional="true" diffuse=".4 .4 .4" specular="0.1 0.1 0.1" pos="0 0 5.0" dir="0 0 -1" castshadow="false" />
+        <light directional="true" diffuse=".6 .6 .6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1" />
+
+        <geom name="ground" type="plane" size="0 0 1" pos="0 0 0" quat="1 0 0 0" material="matplane" condim="1" />
+        <geom class="plastic_visual" type="mesh" pos="0 0 -0.017" rgba="0 0 1 1" mesh="base_link_new"/>
+
+        <!-- <site name="site_o1" pos="0.0755 0.0395 -0.018" size="0.001" rgba="0 0 1 1" type="sphere"/>
+        <site name="site_o2" pos="0.0755 -0.0395 -0.018" size="0.001" rgba="0 0 1 1" type="sphere"/> -->
+        <site name="site_o1" pos="0.0755 0.0395 0.082" size="0.001" rgba="0 0 1 1" type="sphere"/>
+        <site name="site_o2" pos="0.0755 -0.0395 0.082" size="0.001" rgba="0 0 1 1" type="sphere"/>
+        <body name="o" pos="0 0 0.117">
+           
+           
+            <geom class="plastic_visual" type="mesh" rgba="0 0 1 1" mesh="link1"/>
+            <joint name="j0" type="hinge" pos="0 0 -0.017" axis="1 0 0" /> 
+                
+                <body name="s1" pos="0 0 0">
+                        <geom class="plastic_visual" type="mesh" pos="0 0.03775 0.09" rgba="1 1 1 1" mesh="link5" />
+                         <geom class="plastic_visual" type="mesh" pos="0 -0.03775 0.09" rgba="1 1 1 1" mesh="link4" />
+                        <joint name="j1" type="hinge" pos="0 0 0" axis="0 1 0" />
+		        <body name="c1" pos="0 0.0395 0.09">
+		            <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 1 1 1" mesh="link9" />
+		            <joint name="j_c1" type="hinge" pos="0 0 0" axis="0 1 0" />
+	
+		            <body name ="b1" pos="0.0755 -0.0015 0">
+		                <joint name="j_b1" type="ball" pos="0 0 0"/>
+		                <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 0 1 1" mesh="link7" />
+		                <body name="a1" pos="0 0.0015 -0.125">
+		                     <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 0 0 1" mesh="link3" />
+		                    <joint name="j_a1" type="hinge" pos="0 0 0" axis="1 0 0" />
+		                    <joint name="j_a1_2" type="hinge" pos="0 0 0" axis="0 1 0" />
+		                    
+		                    
+		                    
+		                    <site name="site1" pos="0 0 0" size="0.005" rgba="0 1 0 1" type="sphere"/>
+		                </body>
+		            </body>
+		        
+		        </body>
+              
+                
+              
+		        <body name="c2" pos="0 -0.0395 0.09">
+		             <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 1 1 1" mesh="link8" />
+		            <joint name="j_c2" type="hinge" pos="0 0 0" axis="0 1 0" />
+		        
+		            <body name ="b2" pos="0.0755 0.0015 0">
+		                <joint name="j_b2" type="ball" pos="0 0 0"/>
+		                 <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 0 1 1" mesh="link6" />
+		                <body name="a2" pos="0 -0.0015 -0.125">
+		                    <geom class="plastic_visual" type="mesh" pos="0 0 0" rgba="1 0 0 1" mesh="link2" />
+		                    <joint name="j_a2" type="hinge" pos="0 0 0" axis="1 0 0" />
+		                    <joint name="j_a2_2" type="hinge" pos="0 0 0" axis="0 1 0" />
+		                    
+
+		                    <site name="site2" pos="0 0 0" size="0.005" rgba="0 1 0 1" type="sphere"/>
+
+		                </body>
+		            </body>
+		        </body>
+                  </body>
+
+           
+        </body>
+
+    </worldbody>
+<!-- 
+    <contact>
+        <exclude name="e0" body1="o" body2="o1" />
+        <exclude name="e1" body1="o" body2="o2" />
+        <exclude name="e2" body1="o1" body2="o2" />
+    </contact> -->
+
+    <equality>
+
+        <connect name="con1" site1="site_o1" site2="site1" />
+        <connect name="con2" site1="site_o2" site2="site2" />
+        <!-- <weld name="weld1" body1="o" body2="o1" anchor="0 0 0" />
+        <weld name="weld2" body1="o" body2="o2" anchor="0 0 0" /> -->
+    </equality>
+
+    <actuator>
+        <position joint="j_c1" ctrllimited="true" ctrlrange="-0.3 0.3" />
+        <position joint="j_c2" ctrllimited="true" ctrlrange="-0.3 0.3" />
+        <!-- <position joint="j_c1" ctrllimited="true" ctrlrange="-0.875 0.875" />
+        <position joint="j_c2" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_b1" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_b2" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_a1" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_a2" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_a1_2" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+        <!-- <position joint="j_a2_2" ctrllimited="true" ctrlrange="-0.875 0.875" /> -->
+    </actuator>
+</mujoco>
